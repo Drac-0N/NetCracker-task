@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 @Data
 @Entity
-@Table(name = "student")
+@Table(name = "groups")
 public class Group {
 
     @Id
