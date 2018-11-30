@@ -1,23 +1,21 @@
 package model;
 
 import lombok.Data;
-import repository.StudentRepository;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "students")
+@Table(name = "student")
+
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    private String name;
-    private String surname;
-    private String fathersName; //Не знаю как отчество по английски, честно говоря написать
+    private long id;
+    private String[] name;
     private Group group;
-    private Date data;
-
+    private String[] data;
+    private ArrayList<Student> students;
 }
