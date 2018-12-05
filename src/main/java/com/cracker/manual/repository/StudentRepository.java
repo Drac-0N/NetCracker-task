@@ -1,6 +1,6 @@
-package repository;
+package com.cracker.manual.repository;
 
-import model.Student;
+import com.cracker.manual.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

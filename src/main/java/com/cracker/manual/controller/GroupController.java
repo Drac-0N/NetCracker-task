@@ -1,11 +1,11 @@
-package controller;
+package com.cracker.manual.controller;
 
-import model.Group;
+import com.cracker.manual.model.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import repository.GroupRepository;
+import com.cracker.manual.repository.GroupRepository;
 
 import java.net.URI;
 import java.util.List;

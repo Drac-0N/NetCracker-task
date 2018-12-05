@@ -1,6 +1,6 @@
-package repository;
+package com.cracker.manual.repository;
 
-import model.Group;
+import com.cracker.manual.model.Group;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GroupRepository extends JpaRepository<Group, Long> {

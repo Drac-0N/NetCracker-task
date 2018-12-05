@@ -1,9 +1,8 @@
-package model;
+package com.cracker.manual.model;
 
 import lombok.Data;
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Data
 @Entity
