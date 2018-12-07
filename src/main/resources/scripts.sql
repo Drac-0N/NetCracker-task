@@ -15,9 +15,9 @@ COMMENT ON TABLE public.Disciplines IS 'таблица предметов';
 
 CREATE TABLE public.Discipline_Group
 (
-    ID int PRIMARY KEY NOT NULL,
     ID_Discipline int NOT NULL,
-    ID_Group int NOT NULL
+    ID_Group int NOT NULL,
+    PRIMARY KEY(ID_Discipline, ID_Group)
 );
 COMMENT ON TABLE public.Disciplines IS 'таблица связи предмета с группой';
 

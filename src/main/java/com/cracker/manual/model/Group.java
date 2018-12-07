@@ -14,12 +14,4 @@ public class Group {
     private String name;
     private String faculty;
     private ArrayList<Student> students;
-
-    public long getId(){
-        return id;
-    }
-
-    public void setId(long id){
-        this.id=id;
-    }
 }
