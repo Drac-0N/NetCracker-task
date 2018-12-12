@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface GroupRepository extends JpaRepository<Group, Long> {
 
-    @Query("SELECT ALL FROM Discipline_Group JOIN GroupsON ID_Group=ID_Group JOIN Disciplines ON ID_Disciplines=ID_Disciplines")
-    List<String> getAllDisciplines();
+   // @Query("SELECT ALL FROM Discipline_Group JOIN Groups ON ID_Group=ID_Group JOIN Disciplines ON ID_Disciplines=ID_Disciplines")
+   // List<String> getAllDisciplines();
 
-    @Query("SELECT ALL FROM Discipline_Group JOIN GroupsON ID_Group=ID_Group JOIN Disciplines ON ID_Disciplines=ID_Disciplines WHERE ID_Group=") // как тут указать переменную я не понял
-    List<String> getAllDisciplinesByGroup(int ID);
+   // @Query("SELECT ALL FROM Discipline_Group JOIN Groups ON ID_Group=ID_Group JOIN Disciplines ON ID_Disciplines=ID_Disciplines WHERE ID_Group=") // как тут указать переменную я не понял
+   //List<String> getAllDisciplinesByGroup(int ID);
 }

@@ -61,10 +61,11 @@ public class GroupController {
         repository.deleteById(id);
 
     }
-
+    /*
     @GetMapping
     public List<String> getDisciplinesByGroups() {
         studentRepository.deleteAllByGroup();
         return repository.getAllDisciplines();
     }
+    */
 }

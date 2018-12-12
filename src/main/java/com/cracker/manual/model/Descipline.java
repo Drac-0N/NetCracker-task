@@ -1,21 +1,19 @@
 package com.cracker.manual.model;
 
 import lombok.Data;
+
 import javax.persistence.*;
+
 
 @Data
 @Entity
-@Table(name = "student")
-
-public class Student {
+@Table(name = "Descipline")
+public class Descipline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private long ID_Discipline;
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_group")
-    private Group group;
 
 }
