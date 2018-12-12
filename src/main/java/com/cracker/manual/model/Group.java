@@ -16,11 +16,11 @@ public class Group {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "Descipline_Group",
+            name = "Discipline_Group",
             joinColumns = { @JoinColumn(name = "id_group") },
             inverseJoinColumns = { @JoinColumn(name = "id_discipline") }
     )
-    private Set<Descipline> subjects;
+    private Set<Discipline> subjects;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Student> students;

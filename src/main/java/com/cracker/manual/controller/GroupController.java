@@ -1,12 +1,13 @@
 package com.cracker.manual.controller;
 
+import com.cracker.manual.model.Discipline;
 import com.cracker.manual.model.Group;
+import com.cracker.manual.repository.GroupRepository;
 import com.cracker.manual.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import com.cracker.manual.repository.GroupRepository;
 
 import java.net.URI;
 import java.util.List;
@@ -18,9 +19,6 @@ public class GroupController {
 
     @Autowired
     private GroupRepository repository;
-    @Autowired
-    private StudentRepository studentRepository;
-
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Group> getGroup(@PathVariable long id) {
@@ -57,15 +55,8 @@ public class GroupController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteStudent(@PathVariable long id) {
+    public void deleteGroup(@PathVariable long id) {
         repository.deleteById(id);
 
     }
-    /*
-    @GetMapping
-    public List<String> getDisciplinesByGroups() {
-        studentRepository.deleteAllByGroup();
-        return repository.getAllDisciplines();
-    }
-    */
 }

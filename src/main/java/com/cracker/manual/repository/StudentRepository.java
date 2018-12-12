@@ -12,8 +12,4 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findAll();
     Student save(Student student);
     void deleteById(long id);
-
-    //@Query("DELETE ALL FROM students WHERE ID=")// тот же вопрос что в груповом репозитории
-    //void deleteAllByGroup();
-    //spring.jpa.generate-ddl=true
 }
