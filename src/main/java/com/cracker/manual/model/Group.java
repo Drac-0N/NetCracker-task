@@ -20,8 +20,9 @@ public class Group {
             joinColumns = { @JoinColumn(name = "id_group") },
             inverseJoinColumns = { @JoinColumn(name = "id_discipline") }
     )
-    private Set<Discipline> subjects;
+    private Set<Discipline> disciplines;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Student> students;
+
 }
