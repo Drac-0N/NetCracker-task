@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,16 +62,16 @@ public class GroupController {
     }
 
     @GetMapping(path = "/{groupId}/disciplines")
-    public ResponseEntity<List<DisciplineDTO>> getDiscipline(@PathVariable Long groupId) {
+    public List<DisciplineDTO> getDiscipline(@PathVariable Long groupId) {
         Optional<Group> group = groupRepository.findAllByGroupId(groupId);
+        List<DisciplineDTO> disciplines = new ArrayList<>();
         if (group.isPresent()) {
-            List<DisciplineDTO> disciplines = group.get()
+            disciplines = group.get()
                     .getDisciplines().stream()
                     .map(discipline -> new DisciplineDTO(discipline.getName()))
                     .collect(Collectors.toList());
-            return ResponseEntity.ok(disciplines);
         }
-        return ResponseEntity.ok().build();
+        return disciplines;
     }
 }
 
