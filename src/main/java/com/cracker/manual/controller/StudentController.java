@@ -37,7 +37,7 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
         Student createdStudent = studentRepository.save(student);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdStudent.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{studentId}").buildAndExpand(createdStudent.getStudentId()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -47,7 +47,7 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (!studentOptional.isPresent()) return ResponseEntity.notFound().build();
 
-        student.setId(id);
+        student.setStudentId(id);
         Student updatedStudent = studentRepository.save(student);
         return ResponseEntity.ok(updatedStudent);
     }

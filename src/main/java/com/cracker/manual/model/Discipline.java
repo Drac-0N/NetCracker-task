@@ -1,8 +1,10 @@
 package com.cracker.manual.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity
@@ -11,17 +13,16 @@ public class Discipline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long ID_Discipline;
+    private long disciplineId;
     private String name;
 
-    /*
-    @ManyToMany(cascade = { CascadeType.ALL })
+
+    @ManyToMany(cascade = { CascadeType.MERGE })
     @JoinTable(
             name = "Discipline_Group",
-            joinColumns = { @JoinColumn(name = "id_discipline") },
-            inverseJoinColumns = { @JoinColumn(name = "id_group") }
+            joinColumns = { @JoinColumn(name = "discipline_id") },
+            inverseJoinColumns = { @JoinColumn(name = "group_id") }
     )
-    private Set<Group> groups;
-    */
-
+    @JsonIgnoreProperties("disciplines")
+    private List<Group> groups;
 }

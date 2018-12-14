@@ -1,29 +1,28 @@
 package com.cracker.manual.controller;
 
-import com.cracker.manual.model.Discipline;
+import com.cracker.manual.dto.DisciplineDTO;
 import com.cracker.manual.model.Group;
-import com.cracker.manual.repository.DisciplineRepository;
 import com.cracker.manual.repository.GroupRepository;
-import com.cracker.manual.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/groups")
 public class GroupController {
 
     @Autowired
-    private GroupRepository repository;
-    private DisciplineRepository repositoryDiscipline;
+    private GroupRepository groupRepository;
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Group> getGroup(@PathVariable long id) {
-        Optional<Group> group = repository.findById(id);
+    @GetMapping(path = "/{groupId}")
+    public ResponseEntity<Group> getGroup(@PathVariable long groupId) {
+        Optional<Group> group = groupRepository.findById(groupId);
         if (group.isPresent()) {
             return ResponseEntity.ok(group.get());
         } else {
@@ -33,37 +32,45 @@ public class GroupController {
 
     @GetMapping
     public List<Group> getGroups() {
-        return repository.findAll();
+        return groupRepository.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<Group> saveGroup(@RequestBody Group group) {
-        Group newGroup = repository.save(group);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newGroup.getId()).toUri();
+    public ResponseEntity<Group> createGroup(@RequestBody Group group) {
+        Group newGroup = groupRepository.save(group);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{groupId}").buildAndExpand(newGroup.getGroupId()).toUri();
         return ResponseEntity.created(location).build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Group> updateGroup(@RequestBody Group group, @PathVariable long id) {
+    @PutMapping("/{groupId}")
+    public ResponseEntity<Group> updateGroup(@RequestBody Group group, @PathVariable long groupId) {
 
-        Optional<Group> groupOptional = repository.findById(id);
+        Optional<Group> groupOptional = groupRepository.findById(groupId);
         if (!groupOptional.isPresent())
             return ResponseEntity.notFound().build();
 
-        group.setId(id);
-        Group updatedGroup = repository.save(group);
+        group.setGroupId(groupId);
+        Group updatedGroup = groupRepository.save(group);
         return ResponseEntity.ok(updatedGroup);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteGroup(@PathVariable long id) {
-        repository.deleteById(id);
+    @DeleteMapping(path = "/{groupId}")
+    public void deleteGroup(@PathVariable long groupId) {
+        groupRepository.deleteById(groupId);
 
     }
 
-    //@GetMapping(path = "/{id}")
-    //public List<Discipline> getDiscipline(@PathVariable Long id) {
-    //    return repository.getDisciplinesByGroupId(id);
-    //}
+    @GetMapping(path = "/{groupId}/disciplines")
+    public ResponseEntity<List<DisciplineDTO>> getDiscipline(@PathVariable Long groupId) {
+        Optional<Group> group = groupRepository.findAllByGroupId(groupId);
+        if (group.isPresent()) {
+            List<DisciplineDTO> disciplines = group.get()
+                    .getDisciplines().stream()
+                    .map(discipline -> new DisciplineDTO(discipline.getName()))
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(disciplines);
+        }
+        return ResponseEntity.ok().build();
+    }
 }
 
