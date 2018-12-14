@@ -16,7 +16,7 @@ public class Group {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "Discipline_Group",
+            name = "discipline_group",
             joinColumns = { @JoinColumn(name = "id_group") },
             inverseJoinColumns = { @JoinColumn(name = "id_discipline") }
     )

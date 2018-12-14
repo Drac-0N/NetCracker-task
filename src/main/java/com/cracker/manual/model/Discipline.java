@@ -14,6 +14,7 @@ public class Discipline {
     private long ID_Discipline;
     private String name;
 
+    /*
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "Discipline_Group",
@@ -21,4 +22,6 @@ public class Discipline {
             inverseJoinColumns = { @JoinColumn(name = "id_group") }
     )
     private Set<Group> groups;
+    */
+
 }

@@ -26,8 +26,9 @@ public class DisciplineController {
     //public List<Discipline> getDisciplinesByGroupId(@PathVariable long id) {
     //    return repository.getDisciplinesByGroupId(id);
     //}
-    @GetMapping(path = "/{id}")
-    public List<Discipline> getDiscipline(@PathVariable Long id) {
-        return repository.getDisciplinesByGroupId(id);
-    }
+
+    //@GetMapping(path = "/{id}")
+    //public List<Discipline> getDiscipline(@PathVariable Long id) {
+    //    return repository.findAllGroupsByDisciplineId(id);
+    //}
 }

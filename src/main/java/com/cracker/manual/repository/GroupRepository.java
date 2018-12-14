@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface GroupRepository extends JpaRepository<Group, Long>, Iterable<Long>{
+public interface GroupRepository extends JpaRepository<Group, Long>{
 
     //@Query("SELECT ALL FROM discipline d JOIN discipline_groups dg ON d.id_discipline=ds.id_discipline WHERE dg.id_group=:id")
     //Optional<Discipline> getDisciplinesByGroupId(@Param("id") Long id);
