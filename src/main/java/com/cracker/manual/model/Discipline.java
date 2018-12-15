@@ -25,4 +25,13 @@ public class Discipline {
     )
     @JsonIgnoreProperties("disciplines")
     private List<Group> groups;
+
+    @ManyToMany(cascade = { CascadeType.MERGE })
+    @JoinTable(
+            name = "Discipline_Student",
+            joinColumns = { @JoinColumn(name = "discipline_id") },
+            inverseJoinColumns = { @JoinColumn(name = "student_id") }
+    )
+    @JsonIgnoreProperties("disciplines")
+    private List<Student> students;
 }
