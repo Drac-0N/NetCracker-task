@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class DisciplineDTO {
+public class GroupDTO {
     private String name;
 }
