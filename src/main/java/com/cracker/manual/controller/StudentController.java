@@ -1,5 +1,8 @@
 package com.cracker.manual.controller;
 
+import com.cracker.manual.dto.DisciplineDTO;
+import com.cracker.manual.dto.GroupDTO;
+import com.cracker.manual.model.Group;
 import com.cracker.manual.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,8 +11,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.cracker.manual.repository.StudentRepository;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/students")
@@ -55,5 +60,15 @@ public class StudentController {
     @DeleteMapping(path = "/{id}")
     public void deleteStudent(@PathVariable long id) {
         studentRepository.deleteById(id);
+    }
+
+    @GetMapping(path = "/{id}/group")
+    public Group getDiscipline(@PathVariable Long id) {
+        Optional<Student> student = studentRepository.findAllByStudentId(id);
+        Group group = null;
+        if (student.isPresent()) {
+            group = student.get().getGroup();
+        }
+        return group;
     }
 }
