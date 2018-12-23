@@ -13,6 +13,6 @@ public interface DisciplineRepository extends JpaRepository<Discipline, Long> {
     //@Query("SELECT ALL FROM discipline d INNER JOIN discipline_groups dg ON d.id_discipline=ds.id_discipline WHERE dg.id_group=:id")
     //List<Discipline> findAllGroupsByDisciplineId(Long id);
     //List<Discipline> findAllGroupsByID_Discipline(Long id);
-    Optional<Discipline> findAllByDisciplineId(Long id);
+//    Optional<Discipline> findAllByDisciplineId(Long id);
 }
 

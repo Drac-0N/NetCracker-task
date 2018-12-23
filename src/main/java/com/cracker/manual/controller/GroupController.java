@@ -1,6 +1,5 @@
 package com.cracker.manual.controller;
 
-import com.cracker.manual.dto.DisciplineDTO;
 import com.cracker.manual.model.Group;
 import com.cracker.manual.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/groups")
@@ -61,17 +58,17 @@ public class GroupController {
 
     }
 
-    @GetMapping(path = "/{groupId}/disciplines")
-    public List<DisciplineDTO> getDiscipline(@PathVariable Long groupId) {
-        Optional<Group> group = groupRepository.findAllByGroupId(groupId);
-        List<DisciplineDTO> disciplines = new ArrayList<>();
-        if (group.isPresent()) {
-            disciplines = group.get()
-                    .getDisciplines().stream()
-                    .map(discipline -> new DisciplineDTO(discipline.getName()))
-                    .collect(Collectors.toList());
-        }
-        return disciplines;
-    }
+//    @GetMapping(path = "/{groupId}/disciplines")
+//    public List<DisciplineDTO> getDiscipline(@PathVariable Long groupId) {
+//        Optional<Group> group = groupRepository.findAllByGroupId(groupId);
+//        List<DisciplineDTO> disciplines = new ArrayList<>();
+//        if (group.isPresent()) {
+//            disciplines = group.get()
+//                    .getDisciplines().stream()
+//                    .map(discipline -> new DisciplineDTO(discipline.getName()))
+//                    .collect(Collectors.toList());
+//        }
+//        return disciplines;
+//    }
 }
 

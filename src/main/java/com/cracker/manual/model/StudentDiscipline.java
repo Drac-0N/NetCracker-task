@@ -3,8 +3,7 @@ package com.cracker.manual.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -20,6 +19,6 @@ public class StudentDiscipline {
     @ManyToOne
     @JoinColumn(name = "discipline_id")
     private Discipline discipline;
-    private Date date;
+    private LocalDate date;
     private int mark;
 }

@@ -1,23 +1,17 @@
 package com.cracker.manual.controller;
 
-import com.cracker.manual.dto.DisciplineDTO;
 import com.cracker.manual.dto.GroupDTO;
-import com.cracker.manual.entity.MarkByDateRequest;
-import com.cracker.manual.model.Group;
 import com.cracker.manual.model.Student;
-import com.cracker.manual.model.StudentDiscipline;
 import com.cracker.manual.repository.StudentDisciplineRepository;
+import com.cracker.manual.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import com.cracker.manual.repository.StudentRepository;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/students")
@@ -48,7 +42,8 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
         Student createdStudent = studentRepository.save(student);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{studentId}").buildAndExpand(createdStudent.getStudentId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{studentId}").buildAndExpand(createdStudent.getStudentId()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -69,19 +64,13 @@ public class StudentController {
     }
 
     @GetMapping(path = "/{studentId}/group")
-    public Group getDiscipline(@PathVariable Long studentId) {
+    public GroupDTO getDiscipline(@PathVariable Long studentId) {
         Optional<Student> student = studentRepository.findAllByStudentId(studentId);
-        Group group = null;
+        GroupDTO group = null;
         if (student.isPresent()) {
-            group = student.get().getGroup();
+            group = new GroupDTO(student.get().getGroup().getGroupId(),
+                    student.get().getGroup().getName());
         }
         return group;
-    }
-
-    @PostMapping(path = "{studentId}/{disciplineId}")
-    public void setMarkByDate(@PathVariable Long studentId,
-                              @PathVariable long disciplineId,
-                              @RequestBody MarkByDateRequest markByDate) {
-
     }
 }
