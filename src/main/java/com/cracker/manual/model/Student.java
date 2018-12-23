@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "students")
+@Table(name = "student")
 public class Student {
 
     @Id
@@ -19,13 +19,6 @@ public class Student {
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @ManyToMany(cascade = { CascadeType.MERGE })
-    @JoinTable(
-            name = "Discipline_Student",
-            joinColumns = { @JoinColumn(name = "student_id") },
-            inverseJoinColumns = { @JoinColumn(name = "discipline_id") }
-    )
-    @JsonIgnoreProperties("students")
-    private Set<Discipline> disciplines;
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline")
+    private Set<StudentDiscipline> studentDisciplines;
 }

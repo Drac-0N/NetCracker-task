@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "groups")
+@Table(name = "group")
 public class Group {
 
     @Id
@@ -28,5 +28,4 @@ public class Group {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Student> students;
-
 }

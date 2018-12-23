@@ -2,8 +2,11 @@ package com.cracker.manual.controller;
 
 import com.cracker.manual.dto.DisciplineDTO;
 import com.cracker.manual.dto.GroupDTO;
+import com.cracker.manual.entity.MarkByDateRequest;
 import com.cracker.manual.model.Group;
 import com.cracker.manual.model.Student;
+import com.cracker.manual.model.StudentDiscipline;
+import com.cracker.manual.repository.StudentDisciplineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +27,12 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable long id) {
-        Optional<Student> student = studentRepository.findById(id);
+    @Autowired
+    private StudentDisciplineRepository studentDisciplineRepository;
+
+    @GetMapping(path = "/{studentId}")
+    public ResponseEntity<Student> getStudent(@PathVariable long studentId) {
+        Optional<Student> student = studentRepository.findById(studentId);
         if (student.isPresent()) {
             return ResponseEntity.ok(student.get());
         } else {
@@ -46,29 +52,36 @@ public class StudentController {
         return ResponseEntity.created(location).build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@RequestBody Student student, @PathVariable long id) {
+    @PutMapping("/{studentId}")
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student, @PathVariable long studentId) {
 
-        Optional<Student> studentOptional = studentRepository.findById(id);
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
         if (!studentOptional.isPresent()) return ResponseEntity.notFound().build();
 
-        student.setStudentId(id);
+        student.setStudentId(studentId);
         Student updatedStudent = studentRepository.save(student);
         return ResponseEntity.ok(updatedStudent);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteStudent(@PathVariable long id) {
-        studentRepository.deleteById(id);
+    @DeleteMapping(path = "/{studentId}")
+    public void deleteStudent(@PathVariable long studentId) {
+        studentRepository.deleteById(studentId);
     }
 
-    @GetMapping(path = "/{id}/group")
-    public Group getDiscipline(@PathVariable Long id) {
-        Optional<Student> student = studentRepository.findAllByStudentId(id);
+    @GetMapping(path = "/{studentId}/group")
+    public Group getDiscipline(@PathVariable Long studentId) {
+        Optional<Student> student = studentRepository.findAllByStudentId(studentId);
         Group group = null;
         if (student.isPresent()) {
             group = student.get().getGroup();
         }
         return group;
+    }
+
+    @PostMapping(path = "{studentId}/{disciplineId}")
+    public void setMarkByDate(@PathVariable Long studentId,
+                              @PathVariable long disciplineId,
+                              @RequestBody MarkByDateRequest markByDate) {
+
     }
 }

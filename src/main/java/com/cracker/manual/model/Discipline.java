@@ -19,19 +19,10 @@ public class Discipline {
 
     @ManyToMany(cascade = { CascadeType.MERGE })
     @JoinTable(
-            name = "Discipline_Group",
+            name = "discipline_group",
             joinColumns = { @JoinColumn(name = "discipline_id") },
             inverseJoinColumns = { @JoinColumn(name = "group_id") }
     )
     @JsonIgnoreProperties("disciplines")
     private List<Group> groups;
-
-    @ManyToMany(cascade = { CascadeType.MERGE })
-    @JoinTable(
-            name = "Discipline_Student",
-            joinColumns = { @JoinColumn(name = "discipline_id") },
-            inverseJoinColumns = { @JoinColumn(name = "student_id") }
-    )
-    @JsonIgnoreProperties("disciplines")
-    private List<Student> students;
 }
