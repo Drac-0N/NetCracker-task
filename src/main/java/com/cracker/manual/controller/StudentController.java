@@ -2,7 +2,6 @@ package com.cracker.manual.controller;
 
 import com.cracker.manual.dto.GroupDTO;
 import com.cracker.manual.model.Student;
-import com.cracker.manual.repository.StudentDisciplineRepository;
 import com.cracker.manual.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +14,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/students")
-
 public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
-
-    @Autowired
-    private StudentDisciplineRepository studentDisciplineRepository;
 
     @GetMapping(path = "/{studentId}")
     public ResponseEntity<Student> getStudent(@PathVariable long studentId) {

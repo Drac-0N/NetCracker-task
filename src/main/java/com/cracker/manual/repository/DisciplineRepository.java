@@ -1,12 +1,7 @@
 package com.cracker.manual.repository;
 
 import com.cracker.manual.model.Discipline;
-import com.cracker.manual.model.Group;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import java.util.List;
-import java.util.Optional;
 
 public interface DisciplineRepository extends JpaRepository<Discipline, Long> {
     //List<Discipline> getDisciplinesByGroupId(@Param("id") Long id);
